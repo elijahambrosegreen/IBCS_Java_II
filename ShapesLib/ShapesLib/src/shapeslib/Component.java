@@ -16,14 +16,14 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author velasquezda edited by greene
+ * @author velasquezda edited by elijahgreen
  */
 public class Component extends JComponent
 {
     @Override
     public void paintComponent(Graphics g)
     {
-        
+         
         int numRectangles = 0;
         Random rand = new Random();
    
@@ -32,13 +32,14 @@ public class Component extends JComponent
         
         while (numRectangles < 1000)
         {
+            //Rectangle with black border
           Square     mySquare = 
             new Square(rand.nextInt(frame_width), rand.nextInt(frame_height), 
                           rand.nextInt(50) );
             mySquare.setLineWidth (2.0F);
             mySquare.draw(g);
             numRectangles++;
-            
+            //Triangle with red border
           IsoTriangle myTri = 
                   new IsoTriangle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
                           rand.nextInt(50),rand.nextInt(50) );
@@ -47,6 +48,7 @@ public class Component extends JComponent
             myTri.draw(g);
             numRectangles++;
             
+            //Circle with blue border
             Circle myCircle =
                       new Circle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
                           rand.nextInt(50) );
