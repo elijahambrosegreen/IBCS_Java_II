@@ -16,7 +16,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author velasquezda
+ * @author velasquezda edited by greene
  */
 public class Component extends JComponent
 {
@@ -32,12 +32,28 @@ public class Component extends JComponent
         
         while (numRectangles < 1000)
         {
-          Ellipse myEllipse = 
-            new Ellipse(rand.nextInt(frame_width), rand.nextInt(frame_height), 
-                          rand.nextInt(50), rand.nextInt(50) );
-            myEllipse.draw(g);
+          Square     mySquare = 
+            new Square(rand.nextInt(frame_width), rand.nextInt(frame_height), 
+                          rand.nextInt(50) );
+            mySquare.setLineWidth (2.0F);
+            mySquare.draw(g);
             numRectangles++;
             
+          IsoTriangle myTri = 
+                  new IsoTriangle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
+                          rand.nextInt(50),rand.nextInt(50) );
+            myTri.setOutlineColor(Color.red);
+            myTri.setLineWidth(2.0F);
+            myTri.draw(g);
+            numRectangles++;
+            
+            Circle myCircle =
+                      new Circle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
+                          rand.nextInt(50) );
+            myCircle.setLineWidth(2.0F);
+            myCircle.setOutlineColor(Color.blue);
+            myCircle.draw(g);
+            numRectangles++;
         }
         
     }

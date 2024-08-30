@@ -1,6 +1,6 @@
 package shapeslib;
 
-
+import java.awt.Color;
 import shapeslib.Rectangle;
 
 /*

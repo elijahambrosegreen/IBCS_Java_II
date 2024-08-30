@@ -43,6 +43,8 @@ public class Rectangle extends Shape2D {
        {
            g2.fill(box);
        }
-       g2.draw(box);   
+       g2.draw(box); 
+       
+       
     }
 }
