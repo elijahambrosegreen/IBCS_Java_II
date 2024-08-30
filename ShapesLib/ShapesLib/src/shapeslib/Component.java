@@ -6,13 +6,10 @@
 
 package shapeslib;
 
-
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 import javax.swing.JComponent;
-
 
 /**
  *
@@ -32,17 +29,17 @@ public class Component extends JComponent
         
         while (numRectangles < 1000)
         {
-            //Rectangle with black border
-          Square     mySquare = 
+            //Squares with black border
+            Square     mySquare = 
             new Square(rand.nextInt(frame_width), rand.nextInt(frame_height), 
                           rand.nextInt(50) );
             mySquare.setLineWidth (2.0F);
             mySquare.draw(g);
             numRectangles++;
             //Triangle with red border
-          IsoTriangle myTri = 
-                  new IsoTriangle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
-                          rand.nextInt(50),rand.nextInt(50) );
+            IsoTriangle myTri = 
+            new IsoTriangle(rand.nextInt(frame_width), rand.nextInt(frame_height), 
+            rand.nextInt(50),rand.nextInt(50) );
             myTri.setOutlineColor(Color.red);
             myTri.setLineWidth(2.0F);
             myTri.draw(g);
@@ -55,9 +52,7 @@ public class Component extends JComponent
             myCircle.setLineWidth(2.0F);
             myCircle.setOutlineColor(Color.blue);
             myCircle.draw(g);
-            numRectangles++;
-            
-            
+            numRectangles++;  
         }
         
     }
