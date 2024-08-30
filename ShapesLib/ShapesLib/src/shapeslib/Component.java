@@ -54,6 +54,8 @@ public class Component extends JComponent
             myCircle.setOutlineColor(Color.blue);
             myCircle.draw(g);
             numRectangles++;
+            
+            
         }
         
     }
