@@ -38,7 +38,7 @@ public abstract class Shape2D {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.fillColor = Color.white;
+        this.fillColor = Color.yellow;
         this.outlineColor = Color.black;
         this.lineWidth = 1.0F;
         this.myStroke = new BasicStroke(lineWidth);
