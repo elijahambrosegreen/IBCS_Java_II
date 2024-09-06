@@ -20,9 +20,9 @@ public class SimpleStartupGame
     
     while (isAlive)
     {
-        int guess = helper.getUserInput("enter a number");
+        int guess = helper.getUserInput("enter a number:");
         
-        String result = theStartup.checkYourself(guess);
+        String result = theStartup.checkYourself("miss");
         
         numOfGuesses++;
         
@@ -31,9 +31,9 @@ public class SimpleStartupGame
             isAlive = false;
             
             System.out.println("You took " + numOfGuesses + " Guesses!");
-        }
-    }
+        }//ends inner if 
+    } //ends while
 
-    }
+    } ///ends main method
     
-}
+}//ends class
