@@ -4,7 +4,8 @@ import java.util.*;
 /**
  * @author elijahgreen
  */
-public class Startup {
+public class Startup
+{
 
     private ArrayList<String> locationCells;
     private String name;
@@ -19,17 +20,21 @@ public void setName (String n)
     name = n;
 }
 
-public String checkYourself(String userInput){
+public String checkYourself(String userInput)
+{
  String result = "miss";
  int index = locationCells.indexOf(userInput);
  
          if (index >=0){
                  locationCells.remove(index);
                  
-         if (locationCells.isEmpty()){
+         if (locationCells.isEmpty())
+         {
              result = "kill";
              System.out.println ("OUCH! You sunk " + name + "  :( ");
-         }else{
+         }
+         else
+         {
              result = "hit";
          }//end if
      } //ends outer if  //System.out.println(result);

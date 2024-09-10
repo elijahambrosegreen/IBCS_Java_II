@@ -9,7 +9,7 @@ public class StartupBust
 {
      private void setUpGame()
    {
-       Startup one = new Startup(); 
+       Startup one = new Startup();   // construct three startup objects
        one.setName("Theranos");
        Startup two = new Startup();
        two.setName("Humane AI");
@@ -65,7 +65,7 @@ public class StartupBust
      
      private void finishGame()
      {
-         System.out.println("All startups r dead :( ");
+         System.out.println("All of your startups are dead :( Ur stock price is in the gutter!");
          
      }
      
