@@ -1,2 +1,3 @@
-com\mycompany\gametester\SimpleStartup.class
 com\mycompany\gametester\GameHelper.class
+com\mycompany\gametester\Startup.class
+com\mycompany\gametester\StartupBust.class

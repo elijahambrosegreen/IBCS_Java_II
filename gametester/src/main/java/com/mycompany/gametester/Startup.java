@@ -1,15 +1,22 @@
 package com.mycompany.gametester;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * @author elijahgreen
  */
-public class SimpleStartup {
+public class Startup {
 
     private ArrayList<String> locationCells;
+    private String name;
     
-public void setLocationCells (ArrayList<String> locs){
-locationCells = locs;
+public void setLocationCells (ArrayList<String> loc)
+{
+locationCells = loc;
+}
+
+public void setName (String n)
+{
+    name = n;
 }
 
 public String checkYourself(String userInput){
@@ -21,6 +28,7 @@ public String checkYourself(String userInput){
                  
          if (locationCells.isEmpty()){
              result = "kill";
+             System.out.println ("OUCH! You sunk " + name + "  :( ");
          }else{
              result = "hit";
          }//end if
