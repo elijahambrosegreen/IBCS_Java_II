@@ -25,7 +25,7 @@ public class Component extends JComponent
                 for (int[] element : eightbyeight)
                 {
                  Square mySquare = 
-                 new Square(10,10,50); 
+                 new Square(10,10,105); 
                  mySquare.setLineWidth (1.0F);
                  mySquare.draw(g); 
                  
