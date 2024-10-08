@@ -1,6 +1,7 @@
 package dicetester;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -12,24 +13,113 @@ public class DiceFrame extends javax.swing.JFrame {
     /**
      * Creates new form DiceFrame
      */
+    
+    //game state constants
+    public final static int RESET_GAME = 0;
+    public final static int BEFORE_1ST_ROLL = 1;
+    public final static int BEFORE_2ND_ROLL = 2;
+    public final static int BEFORE_3RD_ROLL = 3;
+    public final static int AFTER_3RD_ROLL = 4;
+    public final static int SCORING = 5;
+    public final static int GAME_OVER = 6;
+    
+    //dice state constants
+    public static final int NUM_DICE = 5;
+    public static final int NUM_SIDES = 6;
+    
+            
     public DiceFrame() 
     {
         initComponents();
         
         //create buttons array.
         //create array of dice that you want to hold.
-        rollButtons = new JToggleButton[NUM_DICE];
+        holdButtons = new JToggleButton[NUM_DICE];
         holdArray = new boolean[NUM_DICE];
-        rollButtons[0] = dieOne;
-        rollButtons[1] = dieTwo;
-        rollButtons[2] = dieThree;
-        rollButtons[3] = dieFour;
-        rollButtons[4] = dieFive;    
+        holdButtons[0] = dieOne;
+        holdButtons[1] = dieTwo;
+        holdButtons[2] = dieThree;
+        holdButtons[3] = dieFour;
+        holdButtons[4] = dieFive;    
         myDice = new Dice (NUM_DICE,NUM_SIDES);
         
         numRolls = 0;
         
     }
+    
+    public void manageUIState(int nextState)
+    {
+        switch (nextState)
+        {
+            case RESET_GAME:
+                //todo
+                break; 
+            case BEFORE_1ST_ROLL:
+                //disable hold buttons, then enable roll button, and clear the hold array.
+                
+               clearAndDisableHoldButtons();
+               
+               rollButton.setEnabled(true);
+               
+               clearHoldArray();
+               
+                break;
+            case BEFORE_2ND_ROLL:
+                //now we can enable the hold button. 
+                
+                enableHoldButtons();
+                
+                break;
+            case BEFORE_3RD_ROLL:
+                break;
+            case AFTER_3RD_ROLL:
+                // we need to disable the roll button here. 
+                rollButton.setEnabled(false);
+                break;
+            case SCORING:
+                break;
+            case GAME_OVER:
+                break;   
+            default:
+                JOptionPane.showMessageDialog(this, "Uh Oh! Invalid UI state detected.");
+                break;
+        }
+        currentUIState = nextState;
+        
+        
+        
+        
+    }
+    
+    private void clearAndDisableHoldButtons()
+    {
+        for (int i = 0; i < holdButtons.length; i++)
+        {
+            holdButtons[i].setText("");
+            holdButtons[i].setEnabled(false);
+            holdButtons[i].setSelected(false);
+        }
+            
+    }
+    
+    
+    private void clearHoldArray()
+    {
+        for (int i = 0; i < holdArray.length; i++)
+        {
+            holdArray[i] = false;
+        }
+    }
+    
+    
+    private void enableHoldButtons()
+    {
+        for (int i = 0; i < holdButtons.length; i++)
+        {
+            holdButtons[i].setEnabled(true);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,17 +234,24 @@ public class DiceFrame extends javax.swing.JFrame {
             if (!holdArray[i])
             {
                 myDice.rollDie(i);
-                rollButtons[i].setText("" + myDice.getDieValue(i));
+                holdButtons[i].setText("" + myDice.getDieValue(i));
             }
         }   
         
-        numRolls++;
-        
-        if (numRolls >= 3)
-        {
-            rollButton.setEnabled(false);
-            
-        }
+       if (currentUIState == BEFORE_1ST_ROLL)
+       {
+           manageUIState(BEFORE_2ND_ROLL);
+       }
+       else if (currentUIState == BEFORE_2ND_ROLL)
+       {
+           manageUIState(BEFORE_3RD_ROLL);
+       }
+       else if (currentUIState == BEFORE_3RD_ROLL)
+       {
+           manageUIState(AFTER_3RD_ROLL);
+       }
+
+    
        
     }//GEN-LAST:event_rollButtonActionPerformed
 
@@ -164,14 +261,15 @@ public class DiceFrame extends javax.swing.JFrame {
             
             numRolls = 0;
             
-            for (int i = 0; i < holdArray.length; i++)
+            for (int i = 0; i <= holdArray.length; i++)
             {
                 if (holdArray[i])
                 {
-                    rollButtons[i].doClick();
+                    holdButtons[i].doClick();
                 }
                 holdArray[i] = false;
-                rollButtons[i].setEnabled(true);
+                holdButtons[i].setEnabled(true);
+                holdButtons[i].setText("");
             }
             
     }//GEN-LAST:event_scoreButtonActionPerformed
@@ -246,12 +344,12 @@ public class DiceFrame extends javax.swing.JFrame {
     private javax.swing.JButton scoreButton;
     // End of variables declaration//GEN-END:variables
     private Dice myDice; 
-    public static final int NUM_DICE = 5;
-    public static final int NUM_SIDES = 6;
-    
-    private JToggleButton[] rollButtons;
+   
+    private JToggleButton[] holdButtons;
     private boolean[] holdArray;
     private int numRolls;
+    
+    private int currentUIState;
 
 }
 

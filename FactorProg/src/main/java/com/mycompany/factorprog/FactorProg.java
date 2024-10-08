@@ -23,8 +23,6 @@ public class FactorProg
                 int d = num/f;
                 System.out.println(num + " = " + f +"*" + d );
             }
-            
-            
             if (f == 1)
             {
                 factors = factors + 0;
@@ -37,10 +35,9 @@ public class FactorProg
             {
                 factors +=2;
             }//end if 
-            f = f+1;
-            
-            
+            f++;
         }//end for 
+        
         System.out.println(num + " has " + factors + " factors");
     }//ends method
 }//ends class
