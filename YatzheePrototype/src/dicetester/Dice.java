@@ -1,4 +1,7 @@
 package dicetester;
+
+import java.util.Random;
+
 /**
  * a class that simulates the rolling of dice. 
  * @author 507606
@@ -12,7 +15,7 @@ public class Dice
         {
            numDice = 0; 
            numSides = 0; 
-           rollArray = null;
+           myDice = null;
         }
         // creates a set of dice given the parameters passed in. 
         public Dice (int numDice, int numSides)
@@ -22,12 +25,12 @@ public class Dice
             this.numSides = numSides;
             
             //create an array to hold dice.
-            this.rollArray = new Die[numDice];
+            this.myDice = new Die[numDice];
             
             //loop though array, creating each individual die.
             for (int i = 0; i<numDice; i++)
             {
-                rollArray[i] = new Die(numSides);
+                myDice[i] = new Die(numSides);
             }
             
             
@@ -54,19 +57,29 @@ public class Dice
          * @return the number that was rolled.
          */
         
-        public int rollDie(int dieNum)
+        public int rollDie(int i)
         {
             //index into the rollArray & reroll that die.
-            return rollArray[dieNum].roll(); 
+            return myDice[i].roll(rand); 
+        }
+        
+        public int rollDice()
+        {
+                int sum = 0;
+                for (int i = 0; i <getNumDice(); i++)
+                {
+                    sum += myDice[i].roll(rand);
+                }
+                return sum;
         }
         /**
          * obtains the value of a single die in the array. 
          * @param dieNum indicates which die to get val for. 
          * @return the val of the die. 
          */
-        public int getDieValue(int dieNum)
+        public int getDieValue(int i)
         {
-            return rollArray[dieNum].getValue();   
+            return myDice[i].getValue();   
         }     
         /**
          * sums all of the dice.
@@ -83,10 +96,6 @@ public class Dice
             return sum;
         }
 
-    private int numDice;
-    private int numSides;
-    private Die [] rollArray;
-    
     
     public int getNumDice()
     {
@@ -97,7 +106,29 @@ public class Dice
     {
         return numSides;
     }
+
+    public int[] buildFreqTable() 
+    {
+        int [] freqTable = new int [getNumSides() +1];
+                
+        
+        /**
+         * get val of each die in set of dice 
+         * use the val to index into the freq table array & 
+         * increment the count for that roll val in the table.
+         */
+        for (int i = 0; i < getNumDice(); i++)
+        {
+            freqTable[myDice[i].getValue()]++;
+        }
+        return freqTable;
+    }
     
     
+    
+    private int numDice;
+    private int numSides;
+    private Die [] myDice;
+    private Random rand;
     
 }

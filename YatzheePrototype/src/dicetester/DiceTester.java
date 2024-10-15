@@ -8,7 +8,7 @@ public class DiceTester
     public static void main(String[] args) 
     {
        Die myDie = new Die(6);
-       System.out.println("The number you rolled on a single six-sided die was: " + myDie.roll());
+   //    System.out.println("The number you rolled on a single six-sided die was: " + myDie.roll(rand));
        
        Dice myDice = new Dice(5,6);
        

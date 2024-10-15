@@ -16,7 +16,7 @@ public class Die
         this.numSides = numSides;
     }
         
-    public int roll()
+    public int roll(Random rand)
     {
         Random generator = new Random(); 
         value = generator.nextInt(numSides)+1;

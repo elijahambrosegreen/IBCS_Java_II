@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import dicetester.Dice;
 
 /**
  *
@@ -16,13 +17,13 @@ public class YatzheeJFrame extends javax.swing.JFrame {
      */
     
     //game state constants
-    public final static int RESET_GAME = 0;
-    public final static int BEFORE_1ST_ROLL = 1;
-    public final static int BEFORE_2ND_ROLL = 2;
-    public final static int BEFORE_3RD_ROLL = 3;
-    public final static int AFTER_3RD_ROLL = 4;
-    public final static int SCORING = 5;
-    public final static int GAME_OVER = 6;
+    public final static int RESET_GAME = 1;
+    public final static int BEFORE_1ST_ROLL = 2;
+    public final static int BEFORE_2ND_ROLL = 3;
+    public final static int BEFORE_3RD_ROLL = 4;
+    public final static int AFTER_3RD_ROLL = 5;
+    public final static int SCORING = 6;
+    public final static int GAME_OVER = 7;
     
     // lower score category constants 
     public final static int THREE_OF_A_KIND = 0;
@@ -44,20 +45,75 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     {
         initComponents();
         
+        
+        myDice = new Dice (NUM_DICE,NUM_SIDES);
+        
+        
         //create buttons array.
         //create array of dice that you want to hold.
         holdButtonArray = new JToggleButton[NUM_DICE];
-        holdArray = new boolean[NUM_DICE];
+        
         holdButtonArray[0] = holdButtonOne;
         holdButtonArray[1] = holdButtonTwo;
         holdButtonArray[2] = holdButtonThree;
         holdButtonArray[3] = holdButtonFour;
-        holdButtonArray[4] = holdButtonFive;    
-        myDice = new Dice (NUM_DICE,NUM_SIDES);
+        holdButtonArray[4] = holdButtonFive;  
+        
+        upperScoreButtonArray = new 
+                JToggleButton[GameModel.NUM_UPPER_SCORE_CATS +1];
+        
+        upperScoreButtonArray[1]=this.acesButton;
+        upperScoreButtonArray[2]=this.twosButton;
+        upperScoreButtonArray[3]=this.threesButton;
+        upperScoreButtonArray[4]=this.foursButton;
+        upperScoreButtonArray[5]=this.fivesButton;
+        upperScoreButtonArray[6]=this.sixesButton;
         
         
-        //TMP SHOULD BE RESET GAME.
+        upperScoreTextBoxArray = new 
+                JTextField[GameModel.NUM_UPPER_SCORE_CATS +1];
+        
+        
+        upperScoreTextBoxArray[1] = this.acesField;
+        upperScoreTextBoxArray[2] = this.twosField;
+        upperScoreTextBoxArray[3] = this.threesField;
+        upperScoreTextBoxArray[4] = this.foursField;
+        upperScoreTextBoxArray[5] = this.fivesField;
+        upperScoreTextBoxArray[6] = this.sixesField;
+        
+        
+        
+        lowerScoreButtonArray = new 
+                JToggleButton[GameModel.NUM_LOWER_SCORE_CATS];
+        
+        lowerScoreButtonArray[THREE_OF_A_KIND] = this.threeOfAKindButton;
+        lowerScoreButtonArray[FOUR_OF_A_KIND] = this.fourOfAKindButton;
+        lowerScoreButtonArray[FULL_HOUSE] = this.fullHouseButton;
+        lowerScoreButtonArray[SMALL_STRAIGHT] = this.smallstr8Button;
+        lowerScoreButtonArray[LARGE_STRAIGHT] = this.largeStr8Button;
+        lowerScoreButtonArray[YATZHEE] = this.yahtzeeButton;
+        lowerScoreButtonArray[CHANCE] = this.chanceButton;
+         
+        lowerScoreTextBoxArray = new 
+                JTextField[GameModel.NUM_LOWER_SCORE_CATS];
+        
+         
+        lowerScoreTextBoxArray[THREE_OF_A_KIND] = this.threeKindField;
+        lowerScoreTextBoxArray[FOUR_OF_A_KIND] = this.fourKindField;
+        lowerScoreTextBoxArray[FULL_HOUSE] = this.fullHouseField;
+        lowerScoreTextBoxArray[SMALL_STRAIGHT] = this.smallStr8Field;
+        lowerScoreTextBoxArray[LARGE_STRAIGHT] = this.largeStr8Field;
+        lowerScoreTextBoxArray[YATZHEE] = this.yahtzeeField;
+        lowerScoreTextBoxArray[CHANCE] = this.chanceField;
+        
+  
+        holdArray = new boolean[NUM_DICE];
+        
+        game = new GameModel();
+        manageUIState(RESET_GAME);
         manageUIState(BEFORE_1ST_ROLL);
+  
+      
     }
     
     public void manageUIState(int nextState)
@@ -65,17 +121,14 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         switch (nextState)
         {
             case RESET_GAME:
-                //todo
+                game.clearAllUpperScoringCats();
+                game.clearAllLowerScoringCats();
                 break; 
             case BEFORE_1ST_ROLL:
-                //disable hold buttons, then enable roll button, and clear the hold array.
-                
-               clearAndDisableHoldButtons();
-               
+               //disable hold buttons, then enable roll button, and clear the hold array. 
                rollButton.setEnabled(true);
-               
-               clearHoldArray();
-               
+               clearAndDisableHoldButtons();
+               clearHoldArray();               
                 break;
             case BEFORE_2ND_ROLL:
                 //now we can enable the hold button. 
@@ -95,11 +148,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Uh Oh! Invalid UI state detected.");
                 break;
         }
-        currentUIState = nextState;
-        
-        
-        
-        
+        currentUIState = nextState;  
     }
     
     private void clearAndDisableHoldButtons()
@@ -109,10 +158,8 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             holdButtonArray[i].setText("");
             holdButtonArray[i].setEnabled(false);
             holdButtonArray[i].setSelected(false);
-        }
-            
+        }    
     }
-    
     
     private void clearHoldArray()
     {
@@ -131,6 +178,18 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         }
     }
     
+    private void resetScoreButtons ()
+    {
+        for (int i = 0; i < GameModel.NUM_UPPER_SCORE_CATS; i++)
+        {
+            
+        }
+        for (int i = 0; i < GameModel.NUM_UPPER_SCORE_CATS; i++)
+        {
+            
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,7 +202,6 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         jToggleButton15 = new javax.swing.JToggleButton();
         holdButtonOne = new javax.swing.JToggleButton();
         rollButton = new javax.swing.JButton();
-        scoreButton = new javax.swing.JButton();
         holdButtonFive = new javax.swing.JToggleButton();
         holdButtonThree = new javax.swing.JToggleButton();
         holdButtonFour = new javax.swing.JToggleButton();
@@ -177,14 +235,14 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         upperScoreField = new javax.swing.JTextField();
         bonusField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        bonusLabel = new javax.swing.JLabel();
+        upperScoreLabel = new javax.swing.JLabel();
         grandTotalField = new javax.swing.JTextField();
         totalLowerScoreField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        totalLowerScoreLabel = new javax.swing.JLabel();
+        grandTotalLabel = new javax.swing.JLabel();
         totalUpperScoreField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        totalUpperScoreLabel = new javax.swing.JLabel();
         newGameButton = new javax.swing.JButton();
 
         jToggleButton15.setText("jToggleButton15");
@@ -210,13 +268,6 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         rollButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rollButtonActionPerformed(evt);
-            }
-        });
-
-        scoreButton.setText("Score");
-        scoreButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scoreButtonActionPerformed(evt);
             }
         });
 
@@ -264,6 +315,11 @@ public class YatzheeJFrame extends javax.swing.JFrame {
 
         threeOfAKindButton.setText("3 of a Kind");
         threeOfAKindButton.setPreferredSize(new java.awt.Dimension(120, 40));
+        threeOfAKindButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threeOfAKindButtonActionPerformed(evt);
+            }
+        });
 
         fullHouseButton.setText("Full House");
         fullHouseButton.setPreferredSize(new java.awt.Dimension(115, 40));
@@ -285,8 +341,14 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             }
         });
 
+        yahtzeeButton.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         yahtzeeButton.setText("Yahtzee!");
         yahtzeeButton.setPreferredSize(new java.awt.Dimension(115, 40));
+        yahtzeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yahtzeeButtonActionPerformed(evt);
+            }
+        });
 
         fivesField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,20 +359,20 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 3, 36)); // NOI18N
         jLabel1.setText("Yatzeee!");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel2.setText("Bonus if >63:");
+        bonusLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        bonusLabel.setText("Bonus if >63:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel3.setText("Upper Score:");
+        upperScoreLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        upperScoreLabel.setText("Upper Score:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel4.setText("Total Lower Score:");
+        totalLowerScoreLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        totalLowerScoreLabel.setText("Total Lower Score:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel5.setText("Grand Total:");
+        grandTotalLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        grandTotalLabel.setText("Grand Total:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel6.setText("Total Upper Score:");
+        totalUpperScoreLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        totalUpperScoreLabel.setText("Total Upper Score:");
 
         newGameButton.setText("Play Again?");
 
@@ -324,9 +386,9 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6))
+                            .addComponent(bonusLabel)
+                            .addComponent(upperScoreLabel)
+                            .addComponent(totalUpperScoreLabel))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,81 +402,81 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(holdButtonTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(holdButtonThree, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(scoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(holdButtonThree, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(holdButtonFour, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(holdButtonFive, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(acesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(twosButton)
-                                            .addComponent(threesButton))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(acesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(twosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(threesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(foursButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(foursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(fivesButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fivesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(sixesButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(sixesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(upperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bonusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(totalUpperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(fourOfAKindButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fourKindField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(threeOfAKindButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(threeKindField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(fullHouseButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fullHouseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(smallstr8Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(smallStr8Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(largeStr8Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(largeStr8Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(yahtzeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(yahtzeeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(chanceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, 18)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(acesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(twosButton)
+                                                    .addComponent(threesButton))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(acesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(twosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(threesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(foursButton)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(foursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(fivesButton)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(fivesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(sixesButton)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(sixesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(upperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bonusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(totalUpperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(43, 43, 43)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(grandTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(totalLowerScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(chanceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(fourOfAKindButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(fourKindField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(threeOfAKindButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(threeKindField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(fullHouseButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(fullHouseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(smallstr8Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(smallStr8Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(largeStr8Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(largeStr8Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(yahtzeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(yahtzeeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(totalLowerScoreLabel)
+                                                    .addComponent(chanceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(grandTotalLabel))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(grandTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(totalLowerScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(chanceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(138, 138, 138)
+                                        .addComponent(jLabel1)))))
                         .addGap(0, 17, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(175, 175, 175))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {acesButton, fivesButton, foursButton, sixesButton, threesButton, twosButton});
@@ -437,9 +499,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                     .addComponent(holdButtonFour, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rollButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(threeOfAKindButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,24 +540,24 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                     .addComponent(chanceButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chanceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(upperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(upperScoreLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bonusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                    .addComponent(bonusLabel)
                     .addComponent(totalLowerScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(totalLowerScoreLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
+                        .addComponent(totalUpperScoreLabel)
                         .addComponent(totalUpperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(grandTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addGap(18, 18, 18)
+                        .addComponent(grandTotalLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(newGameButton)
                 .addContainerGap())
         );
@@ -513,6 +573,8 @@ public class YatzheeJFrame extends javax.swing.JFrame {
 
     private void rollButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollButtonActionPerformed
 
+        int rollValue = 0; 
+        
         for (int i = 0; i < NUM_DICE; i++)
         {
             //if user isnt holding die, roll.
@@ -523,32 +585,26 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             }
         }   
         
-       if (currentUIState == BEFORE_1ST_ROLL)
-       {
-           manageUIState(BEFORE_2ND_ROLL);
-       }
-       else if (currentUIState == BEFORE_2ND_ROLL)
-       {
+       switch(currentUIState)
+   {
+       case BEFORE_1ST_ROLL:
+       
+         manageUIState(BEFORE_2ND_ROLL);
+         break;
+       
+       case BEFORE_2ND_ROLL:
+       
            manageUIState(BEFORE_3RD_ROLL);
-       }
-       else if (currentUIState == BEFORE_3RD_ROLL)
-       {
+           break;
+       
+       case BEFORE_3RD_ROLL:
+       
            manageUIState(AFTER_3RD_ROLL);
-       }
        
     }//GEN-LAST:event_rollButtonActionPerformed
-
-    private void scoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreButtonActionPerformed
-        //tmp need to test for last turn
-        manageUIState(BEFORE_1ST_ROLL);
-            
-    }//GEN-LAST:event_scoreButtonActionPerformed
-
-    private void holdButtonOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_holdButtonOneActionPerformed
-        // TODO add your handling code here:
-        holdArray[0] = !holdArray[0];
-    }//GEN-LAST:event_holdButtonOneActionPerformed
-
+    }
+       
+       
     private void holdButtonTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_holdButtonTwoActionPerformed
         // TODO add your handling code here:
         holdArray[1] = !holdArray[1];
@@ -580,6 +636,35 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     private void fivesFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fivesFieldActionPerformed
+
+    private void yahtzeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzeeButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_yahtzeeButtonActionPerformed
+
+    private void threeOfAKindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeOfAKindButtonActionPerformed
+        // TODO add your handling code here:
+        int score = 0; 
+        
+        game.setUsedLowerScoreCat(THREE_OF_A_KIND, true);
+        manageUIState(SCORING);
+        
+        if (game.is3ofAKind(myDice))
+        {
+            score = game.addEmUp(myDice);
+        }
+        game.setLowerScoreCat(THREE_OF_A_KIND, score);
+        //redisplay
+        this.lowerScoreTextBoxArray[THREE_OF_A_KIND].setText("" + score);
+        
+        
+    }//GEN-LAST:event_threeOfAKindButtonActionPerformed
+
+ 
+    private void holdButtonOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_holdButtonOneActionPerformed
+        // TODO add your handling code here:
+        holdArray[0] = !holdArray[0];
+    }//GEN-LAST:event_holdButtonOneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -621,6 +706,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton acesButton;
     private javax.swing.JTextField acesField;
     private javax.swing.JTextField bonusField;
+    private javax.swing.JLabel bonusLabel;
     private javax.swing.JToggleButton chanceButton;
     private javax.swing.JTextField chanceField;
     private javax.swing.JToggleButton fivesButton;
@@ -632,23 +718,18 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton fullHouseButton;
     private javax.swing.JTextField fullHouseField;
     private javax.swing.JTextField grandTotalField;
+    private javax.swing.JLabel grandTotalLabel;
     private javax.swing.JToggleButton holdButtonFive;
     private javax.swing.JToggleButton holdButtonFour;
     private javax.swing.JToggleButton holdButtonOne;
     private javax.swing.JToggleButton holdButtonThree;
     private javax.swing.JToggleButton holdButtonTwo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JToggleButton jToggleButton15;
     private javax.swing.JToggleButton largeStr8Button;
     private javax.swing.JTextField largeStr8Field;
     private javax.swing.JButton newGameButton;
     private javax.swing.JButton rollButton;
-    private javax.swing.JButton scoreButton;
     private javax.swing.JToggleButton sixesButton;
     private javax.swing.JTextField sixesField;
     private javax.swing.JTextField smallStr8Field;
@@ -658,24 +739,28 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton threesButton;
     private javax.swing.JTextField threesField;
     private javax.swing.JTextField totalLowerScoreField;
+    private javax.swing.JLabel totalLowerScoreLabel;
     private javax.swing.JTextField totalUpperScoreField;
+    private javax.swing.JLabel totalUpperScoreLabel;
     private javax.swing.JToggleButton twosButton;
     private javax.swing.JTextField twosField;
     private javax.swing.JTextField upperScoreField;
+    private javax.swing.JLabel upperScoreLabel;
     private javax.swing.JToggleButton yahtzeeButton;
     private javax.swing.JTextField yahtzeeField;
     // End of variables declaration//GEN-END:variables
-    private Dice myDice; 
    
+    
+    private Dice myDice; 
     private JToggleButton[] holdButtonArray;
     private JToggleButton[] upperScoreButtonArray;
     private JToggleButton[] lowerScoreButtonArray;
     private JTextField[] upperScoreTextBoxArray;
     private JTextField[] lowerScoreTextBoxArray;
-    private boolean[] holdArray;
-    private int rollNum; // TMP VAR
+    private boolean holdArray[];
+   // private int rollNum; // TMP VAR
     private int currentUIState;
-   // private GameModel game;
+    private GameModel game;
 
 }
 
