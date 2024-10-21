@@ -121,27 +121,33 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         switch (nextState)
         {
             case RESET_GAME:
-                game.clearAllUpperScoringCats();
-                game.clearAllLowerScoringCats();
+              //  game.clearAllUpperScoringCats();
+               // game.clearAllLowerScoringCats();
                 break; 
             case BEFORE_1ST_ROLL:
+                clearAndDisableHoldButtons();
                //disable hold buttons, then enable roll button, and clear the hold array. 
                rollButton.setEnabled(true);
                clearAndDisableHoldButtons();
-               clearHoldArray();               
+               clearHoldArray();     
+               disableAllScoreButtons();
                 break;
             case BEFORE_2ND_ROLL:
-                //now we can enable the hold button. 
-                enableHoldButtons();
+                //now we can enable the hold buttons. 
+               enableHoldButtons();
+               enableAllUnusedScoreButtons();
                 break;
             case BEFORE_3RD_ROLL:
+                
                 break;
             case AFTER_3RD_ROLL:
                 // we need to disable the roll button here. 
                 rollButton.setEnabled(false);
                 break;
             case SCORING:
-                break;
+               disableAllScoreButtons();
+               game.nextTurn();
+               break;
             case GAME_OVER:
                 break;   
             default:
@@ -153,7 +159,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     
     private void clearAndDisableHoldButtons()
     {
-        for (int i = 0; i < holdButtonArray.length; i++)
+        for (int i = 0; i < NUM_DICE; i++)
         {
             holdButtonArray[i].setText("");
             holdButtonArray[i].setEnabled(false);
@@ -161,32 +167,68 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         }    
     }
     
+    
+    private void showTotalsAndAdvanceTurn()
+            {
+                //this.showTotals();
+                if (game.getCurrentTurnNum() <= GameModel.MAX_NUM_TURN )
+                {
+                    manageUIState(BEFORE_1ST_ROLL);
+                }
+                else
+                {
+                    manageUIState(GAME_OVER);
+                }
+                
+            }
+    
     private void clearHoldArray()
     {
-        for (int i = 0; i < holdArray.length; i++)
+        for (int i = 0; i < NUM_DICE; i++)
         {
             holdArray[i] = false;
         }
     }
+   
     
+    private void enableAllUnusedScoreButtons()
+    {
+        for (int i = 1; i <= GameModel.NUM_UPPER_SCORE_CATS; i++)
+        {
+            if (!game.getUsedUpperScoringCatState(i))
+            {
+                this.upperScoreButtonArray[i].setEnabled(true);
+            }
+        }    
+        for (int i = 0; i < GameModel.NUM_LOWER_SCORE_CATS; i++)
+        {
+            if (!game.getUsedLowerScoringCatState(i))
+            {
+                this.lowerScoreButtonArray[i].setEnabled(true);
+            }
+            
+        }
+    }
+  
     
+   
     private void enableHoldButtons()
     {
-        for (int i = 0; i < holdButtonArray.length; i++)
+        for (int i = 0; i < NUM_DICE; i++)
         {
             holdButtonArray[i].setEnabled(true);
         }
     }
     
-    private void resetScoreButtons ()
+    private void disableAllScoreButtons()
     {
-        for (int i = 0; i < GameModel.NUM_UPPER_SCORE_CATS; i++)
+        for (int i = 1; i <= GameModel.NUM_UPPER_SCORE_CATS; i++)
         {
-            
+            this.upperScoreButtonArray[i].setEnabled(false);
         }
-        for (int i = 0; i < GameModel.NUM_UPPER_SCORE_CATS; i++)
+         for (int i = 0; i < GameModel.NUM_LOWER_SCORE_CATS; i++)
         {
-            
+            this.lowerScoreButtonArray[i].setEnabled(false);
         }
     }
     
@@ -199,7 +241,6 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton15 = new javax.swing.JToggleButton();
         holdButtonOne = new javax.swing.JToggleButton();
         rollButton = new javax.swing.JButton();
         holdButtonFive = new javax.swing.JToggleButton();
@@ -244,8 +285,6 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         totalUpperScoreField = new javax.swing.JTextField();
         totalUpperScoreLabel = new javax.swing.JLabel();
         newGameButton = new javax.swing.JButton();
-
-        jToggleButton15.setText("jToggleButton15");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Elijah's Yatzhee ");
@@ -332,6 +371,11 @@ public class YatzheeJFrame extends javax.swing.JFrame {
 
         fourOfAKindButton.setText("4 of a Kind");
         fourOfAKindButton.setPreferredSize(new java.awt.Dimension(115, 40));
+        fourOfAKindButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fourOfAKindButtonActionPerformed(evt);
+            }
+        });
 
         chanceButton.setText("Chance");
         chanceButton.setPreferredSize(new java.awt.Dimension(115, 40));
@@ -375,6 +419,11 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         totalUpperScoreLabel.setText("Total Upper Score:");
 
         newGameButton.setText("Play Again?");
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -580,8 +629,8 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             //if user isnt holding die, roll.
             if (!holdArray[i])
             {
-                myDice.rollDie(i);
-                holdButtonArray[i].setText("" + myDice.getDieValue(i));
+                rollValue = myDice.rollDie(i);
+                holdButtonArray[i].setText("" + rollValue);
             }
         }   
         
@@ -590,8 +639,8 @@ public class YatzheeJFrame extends javax.swing.JFrame {
        case BEFORE_1ST_ROLL:
        
          manageUIState(BEFORE_2ND_ROLL);
-         break;
-       
+         break;   
+         
        case BEFORE_2ND_ROLL:
        
            manageUIState(BEFORE_3RD_ROLL);
@@ -600,6 +649,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
        case BEFORE_3RD_ROLL:
        
            manageUIState(AFTER_3RD_ROLL);
+           break;
        
     }//GEN-LAST:event_rollButtonActionPerformed
     }
@@ -655,7 +705,9 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         }
         game.setLowerScoreCat(THREE_OF_A_KIND, score);
         //redisplay
-        this.lowerScoreTextBoxArray[THREE_OF_A_KIND].setText("" + score);
+        this.lowerScoreTextBoxArray[THREE_OF_A_KIND].setText( Integer.toString(score));
+        
+        showTotalsAndAdvanceTurn();
         
         
     }//GEN-LAST:event_threeOfAKindButtonActionPerformed
@@ -666,6 +718,40 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         holdArray[0] = !holdArray[0];
     }//GEN-LAST:event_holdButtonOneActionPerformed
 
+    private void fourOfAKindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourOfAKindButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int score = 0;
+        
+        game.setUsedLowerScoreCat(FOUR_OF_A_KIND, true);
+        manageUIState(SCORING);
+        
+        if (game.is4ofAKind(myDice))
+        {
+            score = game.addEmUp(myDice);
+        }
+        
+        game.setLowerScoreCat(FOUR_OF_A_KIND, score);
+        this.lowerScoreTextBoxArray[FOUR_OF_A_KIND].setText( Integer.toString(score));
+        
+        showTotalsAndAdvanceTurn();
+            
+    }//GEN-LAST:event_fourOfAKindButtonActionPerformed
+
+    private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
+        // TODO add your handling code here:
+         manageUIState(RESET_GAME);
+         manageUIState(BEFORE_1ST_ROLL);
+    }//GEN-LAST:event_newGameButtonActionPerformed
+
+  /*  
+    public void showTotals()
+    {
+        game.updateTotals();
+        bonusField.setText(""+game.getBonus());
+        upperScoreField.setText("" + game.getSumUpperScores());
+        totalLowerScoreField.setText("" + game.getSumLowerScores());
+    }
     /**
      * @param args the command line arguments
      */
@@ -725,7 +811,6 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton holdButtonThree;
     private javax.swing.JToggleButton holdButtonTwo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton15;
     private javax.swing.JToggleButton largeStr8Button;
     private javax.swing.JTextField largeStr8Field;
     private javax.swing.JButton newGameButton;
