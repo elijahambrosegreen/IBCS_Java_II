@@ -158,19 +158,13 @@ public class GameModel
             {
                 foundSmallStraight = true;
             }
-            else 
-            {
-                foundSmallStraight = false;
-            }
-            if (freqTable[5] ==1 && freqTable[6] ==1)
+           
+            else if (freqTable[5] ==1 && freqTable[6] ==1)
             {
                 foundSmallStraight = true;
             }
-            else 
-            {
-                foundSmallStraight = false;
-            }
-             if (freqTable[2] ==1 && freqTable[5] ==1)
+           
+            else if (freqTable[2] ==1 && freqTable[5] ==1)
             {
                 foundSmallStraight = true;
             }
