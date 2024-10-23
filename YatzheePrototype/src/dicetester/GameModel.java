@@ -13,13 +13,15 @@ public class GameModel
     
     public GameModel()
     {
-        upperScoreCategories = new int[NUM_UPPER_SCORE_CATS];
+        upperScoreCategories = new int[NUM_UPPER_SCORE_CATS +1];
         lowerScoreCategories = new int[NUM_LOWER_SCORE_CATS ];
         
-        usedUpperScoreCategories = new boolean[NUM_UPPER_SCORE_CATS];
+        usedUpperScoreCategories = new boolean[NUM_UPPER_SCORE_CATS +1];
         usedLowerScoreCategories = new boolean[NUM_LOWER_SCORE_CATS];
         
         currentTurnNum = 1;
+        
+        boolean used = true;
     }
     
     public void clearAllUpperScoringCats()
@@ -89,11 +91,23 @@ public class GameModel
     public void setLowerScoreCat (int index, int score)
     {
         lowerScoreCategories[index] = score;
+        
+        
+    }
+    
+    public void setUpperScoreCat (int index, int score)
+    {
+        upperScoreCategories[index] = score;
     }
     
     public void setUsedLowerScoreCat (int index, boolean used)
     {
         usedLowerScoreCategories[index] = used;
+    }
+    
+      public void setUsedUpperScoreCat (int index, boolean used)
+    {
+        usedUpperScoreCategories[index] = used;
     }
     
     public int addEmUp (Dice myDice)

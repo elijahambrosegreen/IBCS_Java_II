@@ -123,9 +123,9 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             case RESET_GAME:
               //  game.clearAllUpperScoringCats();
                // game.clearAllLowerScoringCats();
+                
                 break; 
             case BEFORE_1ST_ROLL:
-                clearAndDisableHoldButtons();
                //disable hold buttons, then enable roll button, and clear the hold array. 
                rollButton.setEnabled(true);
                clearAndDisableHoldButtons();
@@ -149,6 +149,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
                game.nextTurn();
                break;
             case GAME_OVER:
+                //tmp
                 break;   
             default:
                 JOptionPane.showMessageDialog(this, "Uh Oh! Invalid UI state detected.");
@@ -231,6 +232,9 @@ public class YatzheeJFrame extends javax.swing.JFrame {
             this.lowerScoreButtonArray[i].setEnabled(false);
         }
     }
+    
+
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -336,8 +340,18 @@ public class YatzheeJFrame extends javax.swing.JFrame {
 
         acesButton.setText("Aces");
         acesButton.setPreferredSize(new java.awt.Dimension(120, 40));
+        acesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acesButtonActionPerformed(evt);
+            }
+        });
 
         twosButton.setText("Twos");
+        twosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twosButtonActionPerformed(evt);
+            }
+        });
 
         foursButton.setText("Fours");
         foursButton.addActionListener(new java.awt.event.ActionListener() {
@@ -347,10 +361,25 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         });
 
         threesButton.setText("Threes");
+        threesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threesButtonActionPerformed(evt);
+            }
+        });
 
         fivesButton.setText("Fives");
+        fivesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fivesButtonActionPerformed(evt);
+            }
+        });
 
         sixesButton.setText("Sixes");
+        sixesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sixesButtonActionPerformed(evt);
+            }
+        });
 
         threeOfAKindButton.setText("3 of a Kind");
         threeOfAKindButton.setPreferredSize(new java.awt.Dimension(120, 40));
@@ -649,7 +678,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
        case BEFORE_3RD_ROLL:
        
            manageUIState(AFTER_3RD_ROLL);
-           break;
+       
        
     }//GEN-LAST:event_rollButtonActionPerformed
     }
@@ -677,6 +706,24 @@ public class YatzheeJFrame extends javax.swing.JFrame {
 
     private void foursButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursButtonActionPerformed
         // TODO add your handling code here:
+        
+               int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==4)
+            {
+                score+= 4;
+            }
+        }
+        
+        game.setUpperScoreCat(4, score);
+        
+        this.upperScoreTextBoxArray[4].setText("" + score);
+        
+        manageUIState(BEFORE_1ST_ROLL);
+                
+        
     }//GEN-LAST:event_foursButtonActionPerformed
 
     private void chanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chanceButtonActionPerformed
@@ -709,7 +756,14 @@ public class YatzheeJFrame extends javax.swing.JFrame {
         
         showTotalsAndAdvanceTurn();
         
-        
+        if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
     }//GEN-LAST:event_threeOfAKindButtonActionPerformed
 
  
@@ -743,6 +797,156 @@ public class YatzheeJFrame extends javax.swing.JFrame {
          manageUIState(RESET_GAME);
          manageUIState(BEFORE_1ST_ROLL);
     }//GEN-LAST:event_newGameButtonActionPerformed
+
+    private void acesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acesButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==1)
+            {
+                score+= 1;
+            }
+        }
+        
+        game.setUpperScoreCat(1, score);
+        
+        this.upperScoreTextBoxArray[1].setText("" + score);
+        
+        
+        
+        if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
+            
+                
+    }//GEN-LAST:event_acesButtonActionPerformed
+
+    private void twosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twosButtonActionPerformed
+        // TODO add your handling code here:
+        
+        int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==2)
+            {
+                score+= 2;
+            }
+        }
+        
+        game.setUpperScoreCat(2, score);
+        
+        this.upperScoreTextBoxArray[2].setText("" + score);
+        
+        manageUIState(BEFORE_1ST_ROLL);
+                
+         if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
+        
+    }//GEN-LAST:event_twosButtonActionPerformed
+
+    private void threesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+               int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==3)
+            {
+                score+= 3;
+            }
+        }
+        
+        game.setUpperScoreCat(3, score);
+        
+        this.upperScoreTextBoxArray[3].setText("" + score);
+        
+        manageUIState(BEFORE_1ST_ROLL);
+                
+         if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
+    }//GEN-LAST:event_threesButtonActionPerformed
+
+    private void fivesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesButtonActionPerformed
+        // TODO add your handling code here:
+        
+               int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==5)
+            {
+                score+= 5;
+            }
+        }
+        
+        game.setUpperScoreCat(5, score);
+        
+        this.upperScoreTextBoxArray[5].setText("" + score);
+        
+        manageUIState(BEFORE_1ST_ROLL);
+                
+         if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
+    }//GEN-LAST:event_fivesButtonActionPerformed
+
+    private void sixesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+               int score = 0; 
+        
+        for (int i =0; i < NUM_DICE; i++)
+        {
+            if (myDice.getDieValue(i)==6)
+            {
+                score+= 6;
+            }
+        }
+        
+        game.setUpperScoreCat(6, score);
+        
+        this.upperScoreTextBoxArray[6].setText("" + score);
+        
+        manageUIState(BEFORE_1ST_ROLL);
+          
+         if (game.getCurrentTurnNum() < GameModel.MAX_NUM_TURN)
+        {
+            manageUIState(BEFORE_1ST_ROLL);
+        }
+        else 
+        {
+            manageUIState(GAME_OVER);
+        }
+    }//GEN-LAST:event_sixesButtonActionPerformed
 
   /*  
     public void showTotals()
