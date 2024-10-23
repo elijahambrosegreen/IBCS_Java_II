@@ -46,11 +46,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="bonusLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="upperScoreLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="totalUpperScoreLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -109,7 +108,6 @@
                                           </Group>
                                           <Component id="upperScoreField" min="-2" max="-2" attributes="0"/>
                                           <Component id="bonusField" min="-2" max="-2" attributes="0"/>
-                                          <Component id="totalUpperScoreField" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -245,15 +243,9 @@
                   <Component id="totalLowerScoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="totalUpperScoreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="totalUpperScoreField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="grandTotalField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="grandTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="grandTotalField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="grandTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="47" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -367,6 +359,9 @@
           <Dimension value="[115, 40]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fullHouseButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="smallstr8Button">
       <Properties>
@@ -375,6 +370,9 @@
           <Dimension value="[115, 40]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smallstr8ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="largeStr8Button">
       <Properties>
@@ -383,6 +381,9 @@
           <Dimension value="[115, 40]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="largeStr8ButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="fourOfAKindButton">
       <Properties>
@@ -495,16 +496,6 @@
           <Font name="Segoe UI" size="12" style="3"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Grand Total:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="totalUpperScoreField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="totalUpperScoreLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="3"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Total Upper Score:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="newGameButton">
