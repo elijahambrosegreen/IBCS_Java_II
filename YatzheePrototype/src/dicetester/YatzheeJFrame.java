@@ -45,7 +45,7 @@ public class YatzheeJFrame extends javax.swing.JFrame {
     {
         initComponents();
         
-        getContentPane().setBackground(new java.awt.Color(60,56,54));
+        getContentPane().setBackground(new java.awt.Color(2, 48, 32));
         
         myDice = new Dice (NUM_DICE,NUM_SIDES);
         
@@ -314,7 +314,7 @@ private void clearAllTextBoxes()
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Elijah's Yatzhee ");
         setAutoRequestFocus(false);
-        setBackground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(2, 48, 32));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusableWindowState(false);
         setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
@@ -322,14 +322,17 @@ private void clearAllTextBoxes()
         setResizable(false);
         setSize(new java.awt.Dimension(300, 100));
 
-        holdButtonOne.setBackground(new java.awt.Color(255, 255, 255));
+        holdButtonOne.setBackground(new java.awt.Color(255, 251, 231));
+        holdButtonOne.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        holdButtonOne.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.GreyInline"));
         holdButtonOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 holdButtonOneActionPerformed(evt);
             }
         });
 
-        rollButton.setBackground(new java.awt.Color(255, 255, 255));
+        rollButton.setBackground(new java.awt.Color(255, 251, 231));
+        rollButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         rollButton.setForeground(new java.awt.Color(0, 0, 0));
         rollButton.setText("Roll ");
         rollButton.addActionListener(new java.awt.event.ActionListener() {
@@ -338,35 +341,45 @@ private void clearAllTextBoxes()
             }
         });
 
-        holdButtonFive.setBackground(new java.awt.Color(255, 255, 255));
+        holdButtonFive.setBackground(new java.awt.Color(255, 251, 231));
+        holdButtonFive.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        holdButtonFive.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.GreyInline"));
         holdButtonFive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 holdButtonFiveActionPerformed(evt);
             }
         });
 
-        holdButtonThree.setBackground(new java.awt.Color(255, 255, 255));
+        holdButtonThree.setBackground(new java.awt.Color(255, 251, 231));
+        holdButtonThree.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        holdButtonThree.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.GreyInline"));
         holdButtonThree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 holdButtonThreeActionPerformed(evt);
             }
         });
 
-        holdButtonFour.setBackground(new java.awt.Color(255, 255, 255));
+        holdButtonFour.setBackground(new java.awt.Color(255, 251, 231));
+        holdButtonFour.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        holdButtonFour.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.GreyInline"));
         holdButtonFour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 holdButtonFourActionPerformed(evt);
             }
         });
 
-        holdButtonTwo.setBackground(new java.awt.Color(255, 255, 255));
+        holdButtonTwo.setBackground(new java.awt.Color(255, 251, 231));
+        holdButtonTwo.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        holdButtonTwo.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.GreyInline"));
         holdButtonTwo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 holdButtonTwoActionPerformed(evt);
             }
         });
 
-        acesButton.setBackground(new java.awt.Color(255, 255, 255));
+        acesButton.setBackground(new java.awt.Color(255, 251, 231));
+        acesButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        acesButton.setForeground(new java.awt.Color(0, 0, 0));
         acesButton.setText("Aces");
         acesButton.setPreferredSize(new java.awt.Dimension(120, 40));
         acesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +388,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        twosButton.setBackground(new java.awt.Color(255, 255, 255));
+        twosButton.setBackground(new java.awt.Color(255, 251, 231));
+        twosButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        twosButton.setForeground(new java.awt.Color(0, 0, 0));
         twosButton.setText("Twos");
         twosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,7 +398,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        foursButton.setBackground(new java.awt.Color(255, 255, 255));
+        foursButton.setBackground(new java.awt.Color(255, 251, 231));
+        foursButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        foursButton.setForeground(new java.awt.Color(0, 0, 0));
         foursButton.setText("Fours");
         foursButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,7 +408,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        threesButton.setBackground(new java.awt.Color(255, 255, 255));
+        threesButton.setBackground(new java.awt.Color(255, 251, 231));
+        threesButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        threesButton.setForeground(new java.awt.Color(0, 0, 0));
         threesButton.setText("Threes");
         threesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,7 +418,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        fivesButton.setBackground(new java.awt.Color(255, 255, 255));
+        fivesButton.setBackground(new java.awt.Color(255, 251, 231));
+        fivesButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        fivesButton.setForeground(new java.awt.Color(0, 0, 0));
         fivesButton.setText("Fives");
         fivesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -407,7 +428,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        sixesButton.setBackground(new java.awt.Color(255, 255, 255));
+        sixesButton.setBackground(new java.awt.Color(255, 251, 231));
+        sixesButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        sixesButton.setForeground(new java.awt.Color(0, 0, 0));
         sixesButton.setText("Sixes");
         sixesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,7 +438,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        threeOfAKindButton.setBackground(new java.awt.Color(255, 255, 255));
+        threeOfAKindButton.setBackground(new java.awt.Color(255, 251, 231));
+        threeOfAKindButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        threeOfAKindButton.setForeground(new java.awt.Color(0, 0, 0));
         threeOfAKindButton.setText("3 of a Kind");
         threeOfAKindButton.setPreferredSize(new java.awt.Dimension(120, 40));
         threeOfAKindButton.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +449,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        fullHouseButton.setBackground(new java.awt.Color(255, 255, 255));
+        fullHouseButton.setBackground(new java.awt.Color(255, 251, 231));
+        fullHouseButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        fullHouseButton.setForeground(new java.awt.Color(0, 0, 0));
         fullHouseButton.setText("Full House");
         fullHouseButton.setPreferredSize(new java.awt.Dimension(115, 40));
         fullHouseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -433,7 +460,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        smallstr8Button.setBackground(new java.awt.Color(255, 255, 255));
+        smallstr8Button.setBackground(new java.awt.Color(255, 251, 231));
+        smallstr8Button.setFont(new java.awt.Font("Courier New", 0, 10)); // NOI18N
+        smallstr8Button.setForeground(new java.awt.Color(0, 0, 0));
         smallstr8Button.setText("Small Straight");
         smallstr8Button.setPreferredSize(new java.awt.Dimension(115, 40));
         smallstr8Button.addActionListener(new java.awt.event.ActionListener() {
@@ -442,7 +471,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        largeStr8Button.setBackground(new java.awt.Color(255, 255, 255));
+        largeStr8Button.setBackground(new java.awt.Color(255, 251, 231));
+        largeStr8Button.setFont(new java.awt.Font("Courier New", 0, 10)); // NOI18N
+        largeStr8Button.setForeground(new java.awt.Color(0, 0, 0));
         largeStr8Button.setText("Large Straight");
         largeStr8Button.setPreferredSize(new java.awt.Dimension(115, 40));
         largeStr8Button.addActionListener(new java.awt.event.ActionListener() {
@@ -451,7 +482,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        fourOfAKindButton.setBackground(new java.awt.Color(255, 255, 255));
+        fourOfAKindButton.setBackground(new java.awt.Color(255, 251, 231));
+        fourOfAKindButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        fourOfAKindButton.setForeground(new java.awt.Color(0, 0, 0));
         fourOfAKindButton.setText("4 of a Kind");
         fourOfAKindButton.setPreferredSize(new java.awt.Dimension(115, 40));
         fourOfAKindButton.addActionListener(new java.awt.event.ActionListener() {
@@ -460,7 +493,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        chanceButton.setBackground(new java.awt.Color(255, 255, 255));
+        chanceButton.setBackground(new java.awt.Color(255, 251, 231));
+        chanceButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        chanceButton.setForeground(new java.awt.Color(0, 0, 0));
         chanceButton.setText("Chance");
         chanceButton.setPreferredSize(new java.awt.Dimension(115, 40));
         chanceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -469,8 +504,9 @@ private void clearAllTextBoxes()
             }
         });
 
-        yahtzeeButton.setBackground(new java.awt.Color(255, 255, 255));
-        yahtzeeButton.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        yahtzeeButton.setBackground(new java.awt.Color(255, 251, 231));
+        yahtzeeButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        yahtzeeButton.setForeground(new java.awt.Color(0, 0, 0));
         yahtzeeButton.setText("Yahtzee!");
         yahtzeeButton.setPreferredSize(new java.awt.Dimension(115, 40));
         yahtzeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -479,16 +515,61 @@ private void clearAllTextBoxes()
             }
         });
 
+        acesField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        acesField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        acesField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        threesField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        threesField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        threesField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        foursField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        foursField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        foursField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        fivesField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        fivesField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        fivesField.setMaximumSize(new java.awt.Dimension(100, 100));
         fivesField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fivesFieldActionPerformed(evt);
             }
         });
 
+        twosField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        twosField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        twosField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        sixesField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        sixesField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        sixesField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        threeKindField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        fourKindField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        fullHouseField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        smallStr8Field.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        largeStr8Field.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        yahtzeeField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        chanceField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Thonburi", 3, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Courier New", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Yatzeee!");
+        jLabel1.setText("Yahtzee!");
+
+        upperScoreField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        upperScoreField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        upperScoreField.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        bonusField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        bonusField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        bonusField.setMaximumSize(new java.awt.Dimension(100, 100));
 
         bonusLabel.setBackground(new java.awt.Color(255, 255, 255));
         bonusLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -500,6 +581,10 @@ private void clearAllTextBoxes()
         upperScoreLabel.setForeground(new java.awt.Color(255, 255, 255));
         upperScoreLabel.setText("Upper Score:");
 
+        grandTotalField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
+        totalLowerScoreField.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+
         totalLowerScoreLabel.setBackground(new java.awt.Color(255, 255, 255));
         totalLowerScoreLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         totalLowerScoreLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -510,6 +595,9 @@ private void clearAllTextBoxes()
         grandTotalLabel.setForeground(new java.awt.Color(255, 255, 255));
         grandTotalLabel.setText("Grand Total:");
 
+        newGameButton.setBackground(new java.awt.Color(255, 251, 231));
+        newGameButton.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        newGameButton.setForeground(new java.awt.Color(0, 0, 0));
         newGameButton.setText("Play Again?");
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -557,22 +645,22 @@ private void clearAllTextBoxes()
                                                     .addComponent(acesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(twosButton)
                                                     .addComponent(threesButton))
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(acesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(twosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(threesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(foursButton)
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(foursField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(fivesButton)
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(fivesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(sixesButton)
-                                                .addGap(18, 18, 18)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(sixesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(upperScoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(bonusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -615,7 +703,7 @@ private void clearAllTextBoxes()
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(138, 138, 138)
                                         .addComponent(jLabel1)))))
-                        .addGap(0, 17, Short.MAX_VALUE))))
+                        .addGap(0, 30, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {acesButton, fivesButton, foursButton, sixesButton, threesButton, twosButton});
@@ -690,7 +778,7 @@ private void clearAllTextBoxes()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(grandTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(grandTotalLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
                 .addComponent(newGameButton)
@@ -1074,7 +1162,7 @@ private void clearAllTextBoxes()
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Flatlaf Dark".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
