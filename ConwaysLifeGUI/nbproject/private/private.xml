@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/java2andibcs/IBCS_Java_II/ConwaysLifeGUI/src/conwayslife/ConwaysLife.java</file>
+=======
+            <file>file:/Users/elijahgreen/Documents/GitHub/IBCS_Java_II/ConwaysLifeGUI/src/conwayslife/ConwaysLife.java</file>
+            <file>file:/Users/elijahgreen/Documents/GitHub/IBCS_Java_II/ConwaysLifeGUI/src/conwayslife/ConwaysLifePanel.java</file>
+>>>>>>> 5a7add4cb358354ed5030b3182af9c4d17680ffb
         </group>
     </open-files>
 </project-private>

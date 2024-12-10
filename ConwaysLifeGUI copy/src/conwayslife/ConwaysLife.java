@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 /**
  * @author 507606
  */
-public class ConwaysLife implements MouseListener, ActionListener, Runnable // adds action and mouselisteners, and enables multithreading.
+public class ConwaysLife implements MouseListener, ActionListener, Runnable 
 {
     int gameSize = 30; 
     boolean[][] cells = new boolean[gameSize][gameSize];
