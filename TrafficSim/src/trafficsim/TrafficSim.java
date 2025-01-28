@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class TrafficSim implements ActionListener, Runnable
 {
@@ -15,7 +16,7 @@ public class TrafficSim implements ActionListener, Runnable
     //south container
     JButton start = new JButton ("Start");
     JButton stop = new JButton ("Stop");
-    JLabel throughPut = new JLabel ("Throughput: ")
+    JLabel throughPut = new JLabel ("Throughput: ");
     Container south = new Container ();
     
     //west container
